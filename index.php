@@ -93,6 +93,9 @@ switch ($page) {
     case 'handle_cate':
         require './handle/handle_cate.php';
         break;
+    case 'handle_order':
+        require './handle/handle_order.php';
+        break;
     default:
         echo "<script>alert('404 - Not Found')
                 window.location.href='./index.php'</script>";

@@ -22,18 +22,21 @@
         }
 
         .category-bar {
-            background-color: #f8f9fa;
+            background-color: #fff;
             border-bottom: 1px solid #ddd;
+            padding: 1rem 0;
         }
 
-        .category-bar .btn {
-            border-radius: 30px;
-            margin: 10px;
+        .category-pills .nav-link {
+            color: #333;
+            border-radius: 50rem;
+            padding: 0.5rem 1.25rem;
+            margin: 0 0.25rem;
             transition: all 0.3s;
         }
 
-        .category-bar .btn:hover,
-        .category-bar .btn.active {
+        .category-pills .nav-link.active,
+        .category-pills .nav-link:hover {
             background-color: #0d6efd;
             color: white;
         }
@@ -53,37 +56,45 @@
     </header>
 
     <!-- Danh mục sản phẩm -->
-    <div class="category-bar text-center py-3">
-        <div class="container">
+    <div class="category-bar">
+        <div class="container d-flex justify-content-between align-items-center flex-wrap">
+            <ul class="nav nav-pills category-pills">
+                <li class="nav-item">
+                    <a href="./index.php?page=product&id_cate=0" class="nav-link <?= ($id_cate == 0) ? 'active' : '' ?>">Tất cả</a>
+                </li>
+                <?php
+                // Hiển thị danh mục sản phẩm
+                while ($rowCate = $resultCate->fetch_assoc()) {
+                    $isActive = ($id_cate == $rowCate['id_cate']) ? 'active' : '';
+                ?>
+                    <li class="nav-item">
+                        <a href="./index.php?page=product&id_cate=<?= $rowCate['id_cate'] ?>" class="nav-link <?= $isActive ?>">
+                            <?= htmlspecialchars($rowCate['name']) ?>
+                        </a>
+                    </li>
+                <?php } ?>
+            </ul>
 
-            <a href="./index.php?page=product&id_cate=0"
-                class="btn btn-outline-primary">Tất cả sản phẩm</a>
-
-            <?php
-            // Hiển thị danh mục sản phẩm
-            while ($rowCate = $resultCate->fetch_assoc()) {
-            ?>
-                <a href="./index.php?page=product&id_cate=<?php echo $rowCate['id_cate']; ?>"
-                    class="btn btn-outline-primary">
-                    <?php echo $rowCate['name']; // Tên danh mục
-                    ?>
-                </a>
-            <?php
-            }
-            ?>
-            <!-- Thêm, sửa, xóa danh mục và thêm mới sản phẩm (Chỉ dành cho admin) -->
-            <?php
-            if (config_checkRole('admin') == true) {
-                echo "<a href='./index.php?page=add_cate'
-                  class='btn btn-outline-secondary'>Thêm mới danh mục</a>";
-                echo "<a href='./index.php?page=edit_cate'
-                  class='btn btn-outline-secondary'>Sửa tên danh mục</a>";
-                echo "<a href='./index.php?page=delete_cate'
-                  class='btn btn-outline-secondary'>Xóa danh mục</a>";
-                echo "<a href='./index.php?page=add_product'
-                  class='btn btn-outline-secondary'>Thêm mới sản phẩm</a>";
-            }
-            ?>
+            <!-- Menu quản lý cho Admin -->
+            <?php if (config_checkRole('admin') == true) { ?>
+                <div class="dropdown position-absolute end-0 me-3 mt-3">
+                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-gear-fill me-1"></i> Quản lý
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="./index.php?page=add_product"><i class="bi bi-plus-circle me-2"></i>Thêm sản phẩm</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <h6 class="dropdown-header">Quản lý danh mục</h6>
+                        </li>
+                        <li><a class="dropdown-item" href="./index.php?page=add_cate"><i class="bi bi-bookmark-plus me-2"></i>Thêm danh mục</a></li>
+                        <li><a class="dropdown-item" href="./index.php?page=edit_cate"><i class="bi bi-pencil-square me-2"></i>Sửa danh mục</a></li>
+                        <li><a class="dropdown-item text-danger" href="./index.php?page=delete_cate"><i class="bi bi-trash me-2"></i>Xóa danh mục</a></li>
+                    </ul>
+                </div>
+            <?php } ?>
         </div>
     </div>
 
@@ -91,89 +102,81 @@
     <div class="py-5 bg-light">
         <div class="container">
             <!-- row-1 -->
-            <div class="row">
+            <div class="row g-4">
 
                 <?php
                 // Hiển thị sản phẩm
-                while ($rowProduct = $resultProduct->fetch_assoc()) {
+                if ($resultProduct->num_rows > 0) {
+                    while ($rowProduct = $resultProduct->fetch_assoc()) {
                 ?>
+                        <!-- Product Card -->
+                        <div class="col-md-4 col-lg-3">
+                            <div class="card product-card h-100">
+                                <a href="./index.php?page=product_details&id_product=<?= $rowProduct['id_product'] ?>">
+                                    <img src="<?= htmlspecialchars($rowProduct['image']) ?>" class="card-img-top" style="height:250px; object-fit:cover;" alt="<?= htmlspecialchars($rowProduct['name']) ?>">
+                                </a>
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="card-title">
+                                        <a href="./index.php?page=product_details&id_product=<?= $rowProduct['id_product'] ?>" class="text-dark text-decoration-none"><?= htmlspecialchars($rowProduct['name']) ?></a>
+                                    </h5>
+                                    <div class="card-text text-muted small mb-2"><?= htmlspecialchars($rowProduct['short_description']) ?></div>
 
-                    <!-- card-1 -->
-                    <div class="col-md-3">
-                        <div class="card product-card">
+                                    <div class="mt-auto">
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <div>
+                                                <p class="text-danger fw-bold mb-0"><?= number_format($rowProduct['sell_price']) ?> ₫</p>
+                                                <p class="text-muted text-decoration-line-through" style="font-size: 0.9rem;"><?= number_format($rowProduct['base_price']) ?>₫</p>
+                                            </div>
+                                            <a href="./index.php?page=product_details&id_product=<?= $rowProduct['id_product'] ?>" class="btn btn-sm btn-outline-primary">Chi tiết</a>
+                                        </div>
 
-                            <img src="
-                            <?php
-                            // Link hình ảnh sản phẩm
-                            echo $rowProduct['image'];
-                            ?>"
-                                class="card-img-top img-fluid" style="height:300px; object-fit:cover;" alt="">
-                            <div class="card-body">
-                                <h5 class="card-title"><?php echo $rowProduct['name']; // Tên sản phẩm 
-                                                        ?></h5>
-                                <div class="card-text text-muted"><?= $rowProduct['short_description'] ?></div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <p class="text-danger fw-bold"><?php echo number_format($rowProduct['sell_price']); // Giá sản phẩm 
-                                                                    ?> ₫</p>
-                                    <a href="./index.php?page=product_details&id_product=<?php echo $rowProduct['id_product']; // Id sản phẩm
-                                                                                            ?>" class="btn btn-sm btn-outline-primary">Chi tiết</a>
-
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <p class="text-muted text-decoration-line-through mb-2" style="font-size: 0.9rem;">
-                                        <?php echo number_format($rowProduct['base_price']); // Giá gốc sản phẩm 
-                                        ?>₫</p>
-                                    <?php
-                                    if (config_checkRole('admin')) {
-                                    ?>
-                                        <a href="./index.php?page=edit_product&id_product=<?php echo $rowProduct['id_product']; // Id sản phẩm
-                                                                                            ?>" class="btn btn-sm btn-outline-primary">Chỉnh sửa</a>
-                                        <a onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này không?')" href="./index.php?page=handle_product&delete_product=<?php echo $rowProduct['id_product']; // Id sản phẩm
-                                                                                                                                                                        ?>" class="btn btn-sm btn-outline-primary">Xóa</a>
-                                    <?php } ?>
+                                        <?php if (config_checkRole('admin')) { ?>
+                                            <div class="btn-group w-100" role="group">
+                                                <a href="./index.php?page=edit_product&id_product=<?= $rowProduct['id_product'] ?>" class="btn btn-sm btn-outline-secondary">
+                                                    <i class="bi bi-pencil-square"></i> Sửa
+                                                </a>
+                                                <a onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này không?')" href="./index.php?page=handle_product&delete_product=<?= $rowProduct['id_product'] ?>" class="btn btn-sm btn-outline-danger">
+                                                    <i class="bi bi-trash"></i> Xóa
+                                                </a>
+                                            </div>
+                                        <?php } ?>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                    <?php } // end while
+                } else { ?>
+                    <div class="col-12">
+                        <div class="text-center py-5">
+                            <img src="./images/empty-box.svg" alt="Không có sản phẩm" style="width: 150px; opacity: 0.7;">
+                            <h5 class="mt-4 text-muted">Không có sản phẩm nào</h5>
+                            <p class="text-muted">Hiện chưa có sản phẩm trong danh mục này.</p>
+                        </div>
                     </div>
+                <?php } ?>
+            </div>
 
-                <?php
-                }
-                ?>
+            <!-- Pagination -->
+            <?php if ($totalPage > 1) : ?>
+                <nav aria-label="Page navigation" class="mt-5">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item <?= ($page <= 1) ? 'disabled' : '' ?>">
+                            <a class="page-link" href="./index.php?page=product&id_cate=<?= $id_cate ?>&num_page=<?= $page - 1 ?>">Trước</a>
+                        </li>
 
-                <!-- Page -->
-
-                <nav aria-label="Page navigation">
-                    <ul class="pagination justify-content-center text-muted m-4">
-                        <a class="page-link" href="./index.php?page=product&id_cate=<?php echo $id_cate; ?>&num_page=<?php if ($page > 1) { // Quay lại trang trước
-                                                                                                                            echo $page - 1;
-                                                                                                                        } else echo $page; ?>">Trước
-                        </a>
-
-                        <?php
-                        // Phân trang sản phẩm
-                        while ($numPage <= $totalPage) {
-                            $active = ($page == $numPage) ? 'active' : '';
-                        ?>
-                            <li class="page-item <?php echo $active; ?>">
-                                <a class="page-link" href="./index.php?page=product&id_cate=<?php echo $id_cate; ?>&num_page=<?php echo $numPage; ?>">
-                                    <?php echo $numPage; // Số trang
-                                    ?>
+                        <?php for ($i = 1; $i <= $totalPage; $i++) : ?>
+                            <li class="page-item <?= ($page == $i) ? 'active' : '' ?>">
+                                <a class="page-link" href="./index.php?page=product&id_cate=<?= $id_cate ?>&num_page=<?= $i ?>">
+                                    <?= $i ?>
                                 </a>
                             </li>
-                        <?php
-                            $numPage++;
-                        }
-                        ?>
+                        <?php endfor; ?>
 
-                        <li class="page-item">
-                            <a class="page-link" href="./index.php?page=product&id_cate=<?php echo $id_cate; ?>&num_page=<?php if ($page < $totalPage) { // Đến trang sau
-                                                                                                                                echo $page + 1;
-                                                                                                                            } else echo $page; ?>">
-                                Sau
-                            </a>
+                        <li class="page-item <?= ($page >= $totalPage) ? 'disabled' : '' ?>">
+                            <a class="page-link" href="./index.php?page=product&id_cate=<?= $id_cate ?>&num_page=<?= $page + 1 ?>">Sau</a>
                         </li>
                     </ul>
                 </nav>
-            </div>
+            <?php endif; ?>
         </div>
     </div>

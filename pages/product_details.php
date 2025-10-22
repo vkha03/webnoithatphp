@@ -78,7 +78,6 @@
                         <div class="input-group me-3" style="width: 120px;">
                             <input type="number" class="form-control text-center" value="1" min="1" max="10" name="quantity">
                         </div>
-                        <button type="submit" class="btn btn-dark me-2 px-4">MUA NGAY</button>
                         <input type="submit" class="btn btn-outline-secondary" value="THÊM VÀO GIỎ" name="cart">
                     </form>
                     <div class="divider"></div>
@@ -91,7 +90,7 @@
                             </li>
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" data-bs-toggle="tab" data-bs-target="#reviews"
-                                    type="button">Đánh giá (0)</button>
+                                    type="button">Đánh giá (<?= $totalReviews ?>)</button>
                             </li>
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" data-bs-toggle="tab" data-bs-target="#warranty"

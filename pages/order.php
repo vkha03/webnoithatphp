@@ -36,7 +36,8 @@ require './handle/handle_order.php';
                     <?php
                     $i = 1;
                     while ($order = $resultOrders->fetch_assoc()) {
-                        switch ($order['status']) {
+                        $currentStatus = $order['status'];
+                        switch ($currentStatus) {
                             case 'pending':
                                 $statusText = '⏳ Đang xử lý';
                                 break;
@@ -57,12 +58,40 @@ require './handle/handle_order.php';
                             <td><?= $i++ ?></td>
                             <td><?= htmlspecialchars($order['id_order']) ?></td>
                             <td><?= date("d/m/Y H:i", strtotime($order['created_at'])) ?></td>
-                            <td><?= $statusText ?></td>
+                            <td>
+                                <?= $statusText ?>
+                                <?php if (config_checkRole('admin') === true) { ?>
+                                    <form method="POST" action="./index.php?page=handle_order" style="display:inline-block;">
+                                        <input type="hidden" name="id_order" value="<?= $order['id_order'] ?>">
+
+                                        <!-- icon bấm hiện dropdown -->
+                                        <i class="bi bi-pencil-square"
+                                            style="cursor:pointer; color:#007bff; margin-left:6px;"
+                                            onclick="this.nextElementSibling.style.display='inline-block'"></i>
+
+                                        <!-- dropdown ẩn ban đầu -->
+                                        <select name="status" style="display:none; padding:3px 5px; border-radius:5px;"
+                                            onchange="this.form.submit()">
+                                            <option value="pending" <?= $currentStatus == 'pending' ? 'selected' : '' ?>>⏳ Đang xử lý</option>
+                                            <option value="shipping" <?= $currentStatus == 'shipping' ? 'selected' : '' ?>>🚚 Đang giao hàng</option>
+                                            <option value="completed" <?= $currentStatus == 'completed' ? 'selected' : '' ?>>✅ Hoàn tất</option>
+                                            <option value="cancelled" <?= $currentStatus == 'cancelled' ? 'selected' : '' ?>>❌ Đã hủy</option>
+                                        </select>
+                                    </form>
+                                <?php } ?>
+                            </td>
                             <td>
                                 <a href="./index.php?page=order_detail&id_order=<?= $order['id_order'] ?>"
-                                    class="btn btn-sm btn-outline-primary">
-                                    <i class="bi bi-eye"></i> Xem
+                                    class="btn btn-info btn-sm">
+                                    <i class="bi bi-eye"></i>
                                 </a>
+                                <?php if (config_checkRole('admin') === true) { ?>
+                                    <a href="./index.php?page=handle_order&delete=<?= $order['id_order'] ?>"
+                                        onclick="return confirm('Xác nhận xóa đơn hàng này?')"
+                                        class="btn btn-danger btn-sm" title="Xóa">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                <?php } ?>
                             </td>
                         </tr>
                     <?php } ?>

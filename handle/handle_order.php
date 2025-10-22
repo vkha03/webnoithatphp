@@ -8,6 +8,22 @@ if (config_checkLogin() == false) {
 
 $id_user = $config_id_user;
 
+// === XÓA ĐƠN HÀNG (chỉ admin) ===
+if (isset($_GET['delete']) && config_checkRole('admin') == true) {
+    $id_order = intval($_GET['delete']); // tránh SQL injection
+
+    // Xóa chi tiết đơn hàng trước
+    $connect->query("DELETE FROM order_items WHERE id_order = '$id_order'");
+    // Xóa đơn hàng
+    $connect->query("DELETE FROM orders WHERE id_order = '$id_order'");
+
+    echo "<script>
+        alert('Đã xóa đơn hàng thành công!');
+        window.history.back();
+    </script>";
+    exit;
+}
+
 // === Bộ lọc trạng thái ===
 $statusFilter = $_GET['status'] ?? ''; // Lấy trạng thái từ URL
 
@@ -24,3 +40,22 @@ if (config_checkRole('admin') == true) {
 }
 
 $resultOrders = $connect->query($sqlOrders);
+
+// === Cập nhật trạng thái đơn hàng ===
+if (isset($_POST['id_order']) && isset($_POST['status'])) {
+    $id_order = $_POST['id_order'];
+    $status = $_POST['status'];
+
+    $sql = "UPDATE orders SET status = '$status' WHERE id_order = '$id_order'";
+    if ($connect->query($sql)) {
+        echo "<script>
+            alert('Cập nhật trạng thái thành công!');
+            window.history.back();
+        </script>";
+    } else {
+        echo "<script>
+            alert('Lỗi khi cập nhật!');
+            window.history.back();
+        </script>";
+    }
+}

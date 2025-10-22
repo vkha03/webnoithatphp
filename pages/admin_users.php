@@ -1,5 +1,4 @@
 <?php
-
 // Lấy danh sách user
 $query = "SELECT id_user, full_name, email, phone, created_at, updated_at FROM users ORDER BY id_user DESC";
 $result = $connect->query($query);

@@ -8,6 +8,7 @@
             // Hiển thị danh sách đánh giá sản phẩm
             $sql = "select rv.*, u.full_name as name from reviews rv join users u on u.id_user = rv.id_user where id_product = '$id_product'";
             $result = $connect->query($sql);
+            $totalReviews = $result->num_rows; // Đếm tổng số lượt đánh giá
 
             // Thêm đánh giá vào database
             if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['review'])) {

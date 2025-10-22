@@ -155,7 +155,7 @@ require './handle/handle_order_detail.php';
                                 <tr class="border-bottom">
                                     <td>
                                         <div class="d-flex align-items-center">
-                                            <img src="./images/<?= htmlspecialchars($item['image']) ?>" alt="<?= htmlspecialchars($item['name']) ?>">
+                                            <img src="<?= htmlspecialchars($item['image']) ?>" alt="<?= htmlspecialchars($item['name']) ?>">
                                             <div class="ms-3">
                                                 <p class="fw-bold mb-0"><?= htmlspecialchars($item['name']) ?></p>
                                             </div>

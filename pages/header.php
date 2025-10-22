@@ -131,7 +131,7 @@ require './handle/handle_cart.php';
                 ?>
                     <div class="list-group-item d-flex justify-content-between align-items-center">
                         <div>
-                            <img src="./images/halden801.webp" style="height: 50px;">
+                            <img src="<?= $dataCartIndex['image'] ?>" style="height: 50px;">
                             <h6 class="mb-1"><?= $dataCartIndex['name'] ?></h6>
                             <small class="text-muted"><?= $dataCartIndex['qty'] ?> x <?= number_format($dataCartIndex['sell_price']) ?> ₫</small>
                         </div>
