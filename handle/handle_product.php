@@ -224,6 +224,7 @@
         }
     }
 
+
     // TÌm kiếm sản phẩm
     if (!empty($_POST['keyword'])) {
         $keyword = $_POST['keyword'];
