@@ -199,7 +199,7 @@
         </script>";
         }
     }
-
+    // Xóa sản phẩm
     if (isset($_GET['delete_product'])) {
         $id_product = $_GET['delete_product'] ?? 0;
 
