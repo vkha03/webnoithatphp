@@ -1,4 +1,5 @@
 <?php
+// Lấy thông tin và địa chỉ người dùng
 $user = new User($connect, $config_id_user);
 $address = new Address($connect, $config_id_user);
 ?>

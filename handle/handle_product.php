@@ -224,4 +224,16 @@
         }
     }
 
+    // TÌm kiếm sản phẩm
+    if (!empty($_POST['keyword'])) {
+        $keyword = $_POST['keyword'];
+        $query = "SELECT * FROM products WHERE name LIKE '%$keyword%'";
+        $result = $connect->query($query);
+        $count = 0; // Số lượng sản phẩm
+    }
+
+    // Lấy sản phẩm mới nhất
+    $query = "select * from products order by created_at desc limit 8";
+    $result = $connect->query($query);
+
     ?>

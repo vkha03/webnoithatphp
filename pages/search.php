@@ -1,10 +1,5 @@
 <?php
-if (!empty($_POST['keyword'])) {
-    $keyword = $_POST['keyword'];
-    $query = "SELECT * FROM products WHERE name LIKE '%$keyword%'";
-    $result = $connect->query($query);
-    $count = 0; // Số lượng sản phẩm
-}
+require './handle/handle_product.php';
 ?>
 
 <style>

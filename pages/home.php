@@ -1,6 +1,5 @@
 <?php
-$query = "select * from products order by created_at desc limit 8";
-$result = $connect->query($query);
+require './handle/handle_product.php';
 ?>
 
 <style>

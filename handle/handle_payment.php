@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['payment']) {
     window.location.href = './index.php?page=payment';</script>";
         exit;
     }
-    $check = true;
+    $check = true; // Biến kiểm tra kết quả
     $tempResult = $connect->query($sqlGetCart);
     while ($tempData = $tempResult->fetch_assoc()) {
         $totalPrice += ($tempData['sell_price'] * $tempData['qty']);

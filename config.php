@@ -1,27 +1,27 @@
 <?php
-// Set server database
+// Cấu hình database
 $host = "localhost";
 $user = "root";
 $password = "";
 $database = "quanlybannoithat";
 
-// Start session
+// Mở session mỗi khi đăng nhập
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Get data session
+// Lấy data từ session
 $config_email = $_SESSION['email'] ?? null;
 $config_role = $_SESSION['role'] ?? null;
 $config_id_user = $_SESSION['id_user'] ?? null;
 
-// Connect database
+// Kết nối database
 $connect = new mysqli($host, $user, $password, $database);
 
-// Set language
+// Cài ngôn ngữ database
 mysqli_set_charset($connect, "utf8mb4");
 
-// Check login
+// Kiểm tra đăng nhập
 function config_checkLogin()
 {
     if (isset($_SESSION['email'])) {
@@ -29,7 +29,7 @@ function config_checkLogin()
     } else return false;
 }
 
-// Check role
+// Kiểm tra phân quyền
 function config_checkRole($role)
 {
     if (!isset($_SESSION['role']) || $_SESSION['role'] !== $role) {
