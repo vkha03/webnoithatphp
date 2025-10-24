@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_user'])) {
     }
 }
 
-// Kiểm tra nếu form được submit
+// Đổi mật khẩu
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_password'])) {
     // Lấy dữ liệu từ form
     $current_password = $_POST['current_password'] ?? '';
@@ -106,5 +106,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_password'])) {
     } else {
         echo "<script>alert('❌ Đổi mật khẩu thất bại!'); window.history.back();</script>";
         exit;
+    }
+}
+// Xóa users
+if (isset($_GET['delete_id_user']) && config_checkRole('admin')) {
+    $result = $connect->query("delete from users where id_user = '{$_GET['delete_id_user']}'");
+    if ($result === true) {
+        echo "<script>
+                alert('Xóa thành công!')
+                window.location.href='./index.php?page=admin_users'
+                </script>";
+    } else {
+        echo "<script>
+                alert('Xóa thất bại!')
+                window.location.href='./index.php?page=admin_users'
+                </script>";
     }
 }

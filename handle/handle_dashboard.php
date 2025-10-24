@@ -1,7 +1,7 @@
 <?php
 
 // Lấy tổng doanh thu (cộng tất cả total trong bảng orders có trạng thái 'Hoàn tất')
-$sqlRevenue = "SELECT SUM(total) AS total_revenue FROM orders WHERE status = 'shipped'";
+$sqlRevenue = "SELECT SUM(total) AS total_revenue FROM orders WHERE status = 'completed'";
 $resultRevenue = $connect->query($sqlRevenue);
 $totalRevenue = 0;
 if ($resultRevenue && $row = $resultRevenue->fetch_assoc()) {

@@ -1,7 +1,13 @@
 <?php
-// Lấy thông tin và địa chỉ người dùng
-$user = new User($connect, $config_id_user);
-$address = new Address($connect, $config_id_user);
+// Lấy thông tin và địa chỉ người dùng trang admin
+if ($_GET['id_user']) {
+    $user = new User($connect, $_GET['id_user']);
+    $address = new Address($connect, $_GET['id_user']);
+} else {
+    // Lấy thông tin và địa chỉ người dùng trang user cá nhân
+    $user = new User($connect, $config_id_user);
+    $address = new Address($connect, $config_id_user);
+}
 ?>
 
 <style>

@@ -38,15 +38,11 @@ $result = $connect->query($query);
                                 <td><?= $user['created_at'] ?></td>
                                 <td><?= $user['updated_at'] ?></td>
                                 <td>
-                                    <a href="./index.php?page=user_view&id=<?= $user['id_user'] ?>"
+                                    <a href="./index.php?page=user&id_user=<?= $user['id_user'] ?>"
                                         class="btn btn-info btn-sm" title="Xem chi tiết">
                                         <i class="bi bi-eye"></i>
                                     </a>
-                                    <a href="./index.php?page=user_edit&id=<?= $user['id_user'] ?>"
-                                        class="btn btn-warning btn-sm" title="Chỉnh sửa">
-                                        <i class="bi bi-pencil-square"></i>
-                                    </a>
-                                    <a href="./pages/user_delete.php?id=<?= $user['id_user'] ?>"
+                                    <a href="./index.php?page=update_user&delete_id_user=<?= $user['id_user'] ?>"
                                         onclick="return confirm('Xác nhận xóa người dùng này?')"
                                         class="btn btn-danger btn-sm" title="Xóa">
                                         <i class="bi bi-trash"></i>

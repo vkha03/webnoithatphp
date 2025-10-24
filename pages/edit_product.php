@@ -27,7 +27,7 @@ require './handle/handle_product.php';
             <h3 class="text-center mb-4 text-uppercase">Chỉnh sửa sản phẩm</h3>
             <form method="post" enctype="multipart/form-data">
                 <div>
-                    <img src="<?= $rowProduct['image'] ?>" alt="">
+                    <img src="<?= $rowProduct['image'] ?>" class="w-100 h-100" alt="">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Tên sản phẩm</label>
