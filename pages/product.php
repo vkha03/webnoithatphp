@@ -144,7 +144,7 @@
                                 </div>
                             </div>
                         </div>
-                    <?php } // end while
+                    <?php }
                 } else { ?>
                     <div class="col-12">
                         <div class="text-center py-5">

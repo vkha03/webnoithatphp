@@ -36,3 +36,5 @@ if ($resultRecent) {
         $recentOrders[] = $row;
     }
 }
+// Đếm tổng số yêu cầu hỗ trợ
+$totalSupportRequests = $connect->query("SELECT COUNT(*) AS total FROM requirements")->fetch_assoc()['total'];

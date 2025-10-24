@@ -71,6 +71,9 @@ switch ($page) {
     case 'edit_cate':
         require './pages/edit_cate.php';
         break;
+    case 'list_request':
+        require './pages/list_request.php';
+        break;
     // Handle
     case 'handle_product':
         require './handle/handle_product.php';
