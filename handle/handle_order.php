@@ -50,12 +50,12 @@ if (isset($_POST['id_order']) && isset($_POST['status'])) {
     if ($connect->query($sql)) {
         echo "<script>
             alert('Cập nhật trạng thái thành công!');
-            window.history.back();
+            window.location.href = './index.php?page=order';
         </script>";
     } else {
         echo "<script>
             alert('Lỗi khi cập nhật!');
-            window.history.back();
+            window.location.href = './index.php?page=order';
         </script>";
     }
 }
