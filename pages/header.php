@@ -107,7 +107,7 @@ require './handle/handle_cart.php';
                         </a>
                     </div>
                     <!-- Nút logout -->
-                    <button class=" btn btn-dark btn-sm d-flex align-items-center" name="logout" onclick="window.location.href='./index.php?page=auth&logout'">
+                    <button class=" btn btn-dark btn-sm d-flex align-items-center" name="logout" onclick="window.location.href='./index.php?page=handle_auth&logout'">
                         <i class="bi bi-box-arrow-right"></i>
                     </button>
                 </div>
@@ -163,6 +163,6 @@ require './handle/handle_cart.php';
     <!-- offcanvas-end -->
     <?php if (config_checkLogin() == true) { ?>
         <div class="text-end bg-light py-2 pe-4 border-top">
-            Xin chào! <?= $user->fullName ?>
+            Xin chào! <?= $user->getfullName() ?>
         </div>
     <?php } ?>

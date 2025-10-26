@@ -27,46 +27,46 @@ require './handle/handle_product.php';
             <h3 class="text-center mb-4 text-uppercase">Chỉnh sửa sản phẩm</h3>
             <form method="post" enctype="multipart/form-data">
                 <div>
-                    <img src="<?= $rowProduct['image'] ?>" class="w-100 h-100" alt="">
+                    <img src="<?= $product->getImage() ?>" class="w-100 h-100" alt="">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Tên sản phẩm</label>
-                    <input type="text" name="name" class="form-control" value="<?= $rowProduct['name'] ?>" required>
+                    <input type="text" name="name" class="form-control" value="<?= $product->getName() ?>" required>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Giá gốc (₫)</label>
-                    <input type="number" name="base_price" class="form-control" value="<?= $rowProduct['base_price'] ?>" required>
+                    <input type="number" name="base_price" class="form-control" value="<?= $product->getBasePrice() ?>" required>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Giá bán (₫)</label>
-                    <input type="number" name="sell_price" class="form-control" value="<?= $rowProduct['sell_price'] ?>" required>
+                    <input type="number" name="sell_price" class="form-control" value="<?= $product->getSellPrice() ?>" required>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Vật liệu</label>
-                    <input type="text" name="material" class="form-control" value="<?= $rowProduct['material'] ?>">
+                    <input type="text" name="material" class="form-control" value="<?= $product->getMaterial() ?>">
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Kích thước</label>
-                    <input type="text" name="size" class="form-control" value="<?= $rowProduct['size'] ?>">
+                    <input type="text" name="size" class="form-control" value="<?= $product->getSize() ?>">
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Màu sắc</label>
-                    <input type="text" name="color" class="form-control" value="<?= $rowProduct['color'] ?>">
+                    <input type="text" name="color" class="form-control" value="<?= $product->getColor() ?>">
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Số lượng</label>
-                    <input type="number" name="quantity" class="form-control" value="<?= $rowProduct['quantity'] ?>">
+                    <input type="number" name="quantity" class="form-control" value="<?= $product->getQuantity() ?>">
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Mô tả sản phẩm</label>
-                    <textarea name="description" class="form-control" rows="3"><?= $rowProduct['description'] ?></textarea>
+                    <textarea name="description" class="form-control" rows="3"><?= $product->getDescription() ?></textarea>
                 </div>
                 <label>Chọn ảnh để upload:</label><br>
                 <input type="file" name="image" accept="image/*"><br><br>

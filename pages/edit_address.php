@@ -1,5 +1,5 @@
 <?php
-$address = new Address($connect, $config_id_user);
+require './handle/handle_address.php';
 ?>
 
 <style>
@@ -81,33 +81,33 @@ $address = new Address($connect, $config_id_user);
             <i class="bi bi-pencil-square me-2"></i> Chỉnh sửa địa chỉ
         </div>
         <div class="card-body">
-            <form method="POST" action="index.php?page=update_address">
+            <form method="POST" action="index.php?page=handle_address">
                 <!-- Họ và tên người nhận -->
                 <label for="recipient_name">Họ và tên người nhận</label>
-                <input type="text" id="full_name" name="full_name" class="form-control" value="<?= $address->name ?>" required>
+                <input type="text" id="full_name" name="full_name" class="form-control" value="<?= $address->getName() ?>" required>
 
                 <!-- Số điện thoại người nhận -->
                 <label for="recipient_phone">Số điện thoại người nhận</label>
-                <input type="text" id="phone" name="phone" class="form-control" value="<?= $address->phone ?>" required>
+                <input type="text" id="phone" name="phone" class="form-control" value="<?= $address->getPhone() ?>" required>
 
                 <!-- Địa chỉ -->
                 <label for="province">Tỉnh / Thành phố</label>
-                <input type="text" id="province" name="province" class="form-control" value="<?= $address->province ?>" required>
+                <input type="text" id="province" name="province" class="form-control" value="<?= $address->getProvince() ?>" required>
 
                 <label for="district">Quận / Huyện</label>
-                <input type="text" id="district" name="district" class="form-control" value="<?= $address->district ?>" required>
+                <input type="text" id="district" name="district" class="form-control" value="<?= $address->getDistrict() ?>" required>
 
                 <label for="ward">Phường / Xã</label>
-                <input type="text" id="ward" name="ward" class="form-control" value="<?= $address->ward ?>" required>
+                <input type="text" id="ward" name="ward" class="form-control" value="<?= $address->getWard() ?>" required>
 
                 <label for="street">Đường / Số nhà / Khu vực</label>
-                <input type="text" id="street" name="street" class="form-control" placeholder="Tên đường, số nhà, khu vực..." value="<?= $address->street ?>" required>
+                <input type="text" id="street" name="street" class="form-control" placeholder="Tên đường, số nhà, khu vực..." value="<?= $address->getStreet() ?>" required>
                 <label for="ward">Vị trí</label>
-                <input type="text" id="label" name="label" class="form-control" value="<?= $address->label ?>" required>
+                <input type="text" id="label" name="label" class="form-control" value="<?= $address->getLabel() ?>" required>
 
                 <div style="text-align:center; margin-top:20px;">
                     <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
-                    <a href="index.php?page=address_list" class="btn btn-secondary">Hủy</a>
+                    <a href="./index.php?page=user" class="btn btn-secondary">Hủy</a>
                 </div>
             </form>
         </div>

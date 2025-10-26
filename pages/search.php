@@ -24,20 +24,19 @@ require './handle/handle_product.php';
                 <h3 class="mb-5 text-center">Kết quả tìm kiếm cho "<span class="text-primary"><?php echo $keyword; ?></span>"</h3>
                 <?php
                 while ($row = $result->fetch_assoc()) {
-                    // Lấy ảnh sản phẩm
                     $count++;
                 ?>
                     <!-- card-1 -->
                     <div class="col-md-4 col-lg-3">
                         <div class="card product-card h-100">
                             <a href="./index.php?page=product_details&id_product=<?= $row['id_product'] ?>">
-                                <img src="<?= htmlspecialchars($row['image']) ?>" class="card-img-top" style="height:250px; object-fit:cover;" alt="<?= htmlspecialchars($row['name']) ?>">
+                                <img src="<?= $row['image'] ?>" class="card-img-top" style="height:250px; object-fit:cover;" alt="<?= $row['name'] ?>">
                             </a>
                             <div class="card-body d-flex flex-column">
                                 <h5 class="card-title">
-                                    <a href="./index.php?page=product_details&id_product=<?= $row['id_product'] ?>" class="text-dark text-decoration-none"><?= htmlspecialchars($row['name']) ?></a>
+                                    <a href="./index.php?page=product_details&id_product=<?= $row['id_product'] ?>" class="text-dark text-decoration-none"><?= $row['name'] ?></a>
                                 </h5>
-                                <div class="card-text text-muted small mb-2"><?= htmlspecialchars($row['short_description']) ?></div>
+                                <div class="card-text text-muted small mb-2"><?= $row['short_description'] ?></div>
 
                                 <div class="mt-auto">
                                     <div class="d-flex justify-content-between align-items-center mb-2">

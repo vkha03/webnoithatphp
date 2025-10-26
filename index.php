@@ -78,26 +78,23 @@ switch ($page) {
     case 'handle_product':
         require './handle/handle_product.php';
         break;
-    case 'update_user':
-        require './handle/update_user.php';
+    case 'handle_user':
+        require './handle/handle_user.php';
         break;
-    case 'auth':
-        require './handle/auth.php';
+    case 'handle_auth':
+        require './handle/handle_auth.php';
         break;
-    case 'delete_cate':
-        require './pages/delete_cate.php';
-        break;
-    case 'delete_cart':
-        require './pages/delete_cart.php';
-        break;
-    case 'update_address':
-        require './handle/update_address.php';
+    case 'handle_address':
+        require './handle/handle_address.php';
         break;
     case 'handle_cate':
         require './handle/handle_cate.php';
         break;
     case 'handle_order':
         require './handle/handle_order.php';
+        break;
+    case 'handle_request':
+        require './handle/handle_request.php';
         break;
     default:
         echo "<script>alert('404 - Not Found')

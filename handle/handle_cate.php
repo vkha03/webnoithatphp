@@ -1,7 +1,6 @@
 <?php
 // Lấy tất cả danh mục
-$query = "SELECT * FROM categories";
-$result = $connect->query($query);
+$result = $connect->query("SELECT * FROM categories");
 
 // Cập nhật danh mục
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_cate'])) {
@@ -11,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_cate'])) {
     if (empty($new_name)) {
         echo "<script>
             alert('Tên danh mục không được để trống!');
-            window.location.href='./index.php?page=edit_cate';
+            window.history.back();
         </script>";
         exit;
     }
@@ -25,10 +24,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_cate'])) {
     } else {
         echo "<script>
             alert('Cập nhật thất bại!');
-            window.location.href='./index.php?page=edit_cate';
+            window.history.back();
         </script>";
     }
 }
+
+// Thêm danh mục
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_cate'])) {
     $category_name = trim($_POST['category_name']);
 
@@ -49,10 +50,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_cate'])) {
     } else {
         echo "<script>
             alert('Thêm danh mục thất bại!');
-            window.location.href='./index.php?page=add_cate';
+            window.history.back();
         </script>";
     }
 }
+
 // Xóa danh mục
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_cate'])) {
     $id_category = $_POST['id_category'];

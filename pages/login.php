@@ -75,7 +75,7 @@
                     <div class="tab-content" id="authTabsContent">
                         <!--form dangnhap -->
                         <div class="tab-pane fade show active" id="login" role="tabpanel">
-                            <form id="form1" method="post" action="./index.php?page=auth">
+                            <form id="form1" method="post" action="./index.php?page=handle_auth">
                                 <div class="mb-3">
                                     <label for="login-email" class="form-label">Email</label>
                                     <input type="email" class="form-control" name="login_email" required>
@@ -97,7 +97,7 @@
 
                         <!-- form dangki -->
                         <div class="tab-pane fade" id="register" role="tabpanel">
-                            <form id="form2" method="post" action="./index.php?page=auth">
+                            <form id="form2" method="post" action="./index.php?page=handle_auth">
                                 <div class="row mb-3">
                                     <div class="col-md-6">
                                         <label for="full-name" class="form-label">Họ và Tên</label>

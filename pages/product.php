@@ -132,7 +132,7 @@
 
                                         <?php if (config_checkRole('admin')) { ?>
                                             <div class="btn-group w-100" role="group">
-                                                <a href="./index.php?page=edit_product&id_product=<?= $rowProduct['id_product'] ?>" class="btn btn-sm btn-outline-secondary">
+                                                <a href="./index.php?page=edit_product&update_product=<?= $rowProduct['id_product'] ?>" class="btn btn-sm btn-outline-secondary">
                                                     <i class="bi bi-pencil-square"></i> Sửa
                                                 </a>
                                                 <a onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này không?')" href="./index.php?page=handle_product&delete_product=<?= $rowProduct['id_product'] ?>" class="btn btn-sm btn-outline-danger">

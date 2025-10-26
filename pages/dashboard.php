@@ -33,7 +33,7 @@ require './handle/handle_dashboard.php';
             <div class="card text-white bg-primary shadow-sm rounded-4">
                 <div class="card-body text-center">
                     <h5 class="card-title mb-1">Tổng doanh thu</h5>
-                    <h3><?= number_format($totalRevenue, 0, ',', '.') ?>₫</h3>
+                    <h3><?= number_format($totalRevenue) ?>₫</h3>
                 </div>
             </div>
         </div>
@@ -91,6 +91,7 @@ require './handle/handle_dashboard.php';
                         <th>Mã đơn</th>
                         <th>Khách hàng</th>
                         <th>Trạng thái</th>
+                        <th>Ngày tạo</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -99,19 +100,8 @@ require './handle/handle_dashboard.php';
                             <tr>
                                 <td>#<?= $order['id_order'] ?></td>
                                 <td><?= htmlspecialchars($order['full_name']) ?></td>
-                                <td>
-                                    <?php
-                                    $statusColor = match ($order['status']) {
-                                        'Hoàn tất' => 'success',
-                                        'Đang giao' => 'warning',
-                                        'Đã hủy' => 'danger',
-                                        default => 'secondary'
-                                    };
-                                    ?>
-                                    <span class="badge bg-<?= $statusColor ?>">
-                                        <?= $order['status'] ?>
-                                    </span>
-                                </td>
+                                <td><?= $order['status'] ?></td>
+                                <td><?= $order['created_at'] ?></td>
                             </tr>
                         <?php endforeach; ?>
                     <?php else: ?>

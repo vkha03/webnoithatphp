@@ -5,21 +5,21 @@ $user = "root";
 $password = "";
 $database = "quanlybannoithat";
 
-// Mở session mỗi khi đăng nhập
+// Mở session mỗi khi load trang
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-
-// Lấy data từ session
-$config_email = $_SESSION['email'] ?? null;
-$config_role = $_SESSION['role'] ?? null;
-$config_id_user = $_SESSION['id_user'] ?? null;
 
 // Kết nối database
 $connect = new mysqli($host, $user, $password, $database);
 
 // Cài ngôn ngữ database
 mysqli_set_charset($connect, "utf8mb4");
+
+// Lấy data từ session
+$config_email = $_SESSION['email'] ?? null;
+$config_role = $_SESSION['role'] ?? null;
+$config_id_user = $_SESSION['id_user'] ?? null;
 
 // Kiểm tra đăng nhập
 function config_checkLogin()

@@ -1,6 +1,6 @@
 <?php
-// Xử lý form khi submit
 
+// Xử lý gửi yêu cầu liên hệ hỗ trợ
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (config_checkLogin() == false) {
         echo "<script>
@@ -18,7 +18,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </script>";
     }
 
-    // Chuẩn bị câu lệnh SQL
     $sql = "INSERT INTO requirements (id_user, title, description, status) VALUES ('$config_id_user', '$title', '$description', 'pending')";
 
     if ($connect->query($sql)) {

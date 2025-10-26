@@ -1,14 +1,13 @@
 <?php
 
-// Kiểm tra nếu form được submit
+// Cập nhật thông tin user
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_user'])) {
+
     // Lấy dữ liệu từ form
     $full_name = $_POST['full_name'];
     $email = $_POST['email'];
     $phone = $_POST['phone'];
-
-    // Lấy id user hiện tại
-    $id_user = $config_id_user;
+    $id_user = $config_id_user; // Lấy id user hiện tại
 
     // Xử lý avatar nếu có upload
     $avatar_sql = '';
@@ -89,11 +88,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_password'])) {
     }
 
     // Lấy mật khẩu hiện tại từ database
-    $sql = "SELECT password_hash FROM users WHERE id_user = '$id_user' LIMIT 1";
-    $result = $connect->query($sql);
-    $user_data = $result->fetch_assoc();
+    $user = new User($connect, $id_user);
 
-    if (!$user_data || $current_password !== $user_data['password']) {
+    if ($current_password !== $user->getPassword()) {
         echo "<script>alert('❌ Mật khẩu hiện tại không đúng!'); window.history.back();</script>";
         exit;
     }
@@ -108,9 +105,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_password'])) {
         exit;
     }
 }
-// Xóa users
+
+// Xóa users (trang admin)
 if (isset($_GET['delete_id_user']) && config_checkRole('admin')) {
-    $result = $connect->query("delete from users where id_user = '{$_GET['delete_id_user']}'");
+    $result = $connect->query("DELETE FROM users WHERE id_user = '{$_GET['delete_id_user']}'");
     if ($result === true) {
         echo "<script>
                 alert('Xóa thành công!')
@@ -122,4 +120,14 @@ if (isset($_GET['delete_id_user']) && config_checkRole('admin')) {
                 window.location.href='./index.php?page=admin_users'
                 </script>";
     }
+}
+
+// Lấy thông tin và địa chỉ người dùng trang admin
+if (isset($_GET['id_user'])) {
+    $user = new User($connect, $_GET['id_user']);
+    $address = new Address($connect, $_GET['id_user']);
+} else {
+    // Lấy thông tin và địa chỉ người dùng trang user cá nhân
+    $user = new User($connect, $config_id_user);
+    $address = new Address($connect, $config_id_user);
 }

@@ -147,10 +147,8 @@ require './handle/handle_order_detail.php';
                         </thead>
                         <tbody>
                             <?php
-                            $total = 0;
                             while ($item = $resultItems->fetch_assoc()) {
-                                $subtotal = $item['qty'] * $item['sell_price'];
-                                $total += $subtotal;
+                                $subtotal = $item['qty'] * $item['sell_price']; // Giá trị tạm tính cho mỗi sản phẩm
                             ?>
                                 <tr class="border-bottom">
                                     <td>

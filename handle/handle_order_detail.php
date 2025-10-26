@@ -15,13 +15,6 @@ $sqlOrder = "SELECT o.*, u.full_name, u.email, a.recipient_name AS address_name,
              LEFT JOIN addresses a ON o.id_address = a.id_address
              WHERE o.id_order = '$id_order'";
 $resultOrder = $connect->query($sqlOrder);
-
-if ($resultOrder->num_rows === 0) {
-    echo "<script>alert('Không tìm thấy đơn hàng này!');
-    window.location.href = './index.php?page=order';</script>";
-    exit;
-}
-
 $order = $resultOrder->fetch_assoc();
 
 // Lấy chi tiết sản phẩm trong đơn hàng
@@ -30,14 +23,6 @@ $sqlItems = "SELECT oi.*, p.name, p.sell_price, p.image
              JOIN products p ON p.id_product = oi.id_product 
              WHERE oi.id_order = '$id_order'";
 $resultItems = $connect->query($sqlItems);
-
-// Tính tổng tiền đơn hàng
-$sqlTotal = "SELECT SUM(oi.unit_price * oi.qty) AS totalOrder 
-             FROM order_items oi 
-             WHERE oi.id_order = '$id_order'";
-$resultTotal = $connect->query($sqlTotal);
-$totalOrder = $resultTotal->fetch_assoc()['totalOrder'] ?? 0;
-
 
 // Xử lý trạng thái hiển thị
 switch ($order['status']) {

@@ -55,23 +55,23 @@
             <div class="col-lg-6 mb-4">
                 <div class="container p-3">
                     <!-- carousel-start -->
-                    <img src="<?php echo $rowProduct['image']; ?>" class="d-block w-100" alt="anh1">
+                    <img src="<?= $product->getImage(); ?>" class="d-block w-100" alt="anh1">
                 </div>
             </div>
             <!-- carousel-end -->
             <div class="col-lg-6 ">
                 <div class="product-container p-4">
-                    <h1><?php echo $rowProduct['name']; ?></h1>
+                    <h1><?= $product->getName(); ?></h1>
 
                     <div class="price-container">
-                        <span class="sale-price"><?php echo number_format($rowProduct['sell_price']); ?> ₫</span>
+                        <span class="sale-price"><?= number_format($product->getSellPrice()); ?> ₫</span>
                     </div>
 
                     <div class="product-meta mt-3">
-                        <p><strong>Vật liệu: </strong><?= $rowProduct['material'] ?></p>
-                        <p><strong>Kích thước: </strong><?= $rowProduct['size'] ?></p>
-                        <p><strong>Màu sắc: </strong><?= $rowProduct['color'] ?></p>
-                        <p><strong>Số lượng còn lại: </strong> <?= $rowProduct['quantity'] ?></p>
+                        <p><strong>Vật liệu: </strong><?= $product->getMaterial(); ?></p>
+                        <p><strong>Kích thước: </strong><?= $product->getSize(); ?></p>
+                        <p><strong>Màu sắc: </strong><?= $product->getColor(); ?></p>
+                        <p><strong>Số lượng còn lại: </strong> <?= $product->getQuantity(); ?></p>
                     </div>
 
                     <form class="d-flex align-items-center mt-4" method="post">
@@ -104,7 +104,7 @@
 
                         <div class="tab-content p-3">
                             <div class="tab-pane fade show active" id="description">
-                                <p><?= $rowProduct['description'] ?></p>
+                                <p><?= $product->getDescription(); ?></p>
                             </div>
                             <div class="tab-pane fade" id="reviews">
                                 <?php

@@ -42,7 +42,7 @@ $result = $connect->query($query);
                                         class="btn btn-info btn-sm" title="Xem chi tiết">
                                         <i class="bi bi-eye"></i>
                                     </a>
-                                    <a href="./index.php?page=update_user&delete_id_user=<?= $user['id_user'] ?>"
+                                    <a href="./index.php?page=handle_user&delete_id_user=<?= $user['id_user'] ?>"
                                         onclick="return confirm('Xác nhận xóa người dùng này?')"
                                         class="btn btn-danger btn-sm" title="Xóa">
                                         <i class="bi bi-trash"></i>

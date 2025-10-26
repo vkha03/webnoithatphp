@@ -7,13 +7,13 @@ if (isset($_POST['login'])) {
         echo "<script> alert('Vui lòng không để trống mật khẩu và email !!');
           </script>";
     } else {
-        $sql = "SELECT * FROM users WHERE email='$email' AND password_hash='$password_hash'";
-        $hi = mysqli_query($connect, $sql);
-        if (mysqli_num_rows($hi) > 0) {
-            $in = mysqli_fetch_array($hi);
-            $_SESSION['email'] = $in['email'];
-            $_SESSION['role'] = $in['role'];
-            $_SESSION['id_user'] = $in['id_user'];
+        $result = $connect->query("SELECT * FROM users WHERE email = '$email' AND password_hash = '$password_hash'");
+        if ($result->num_rows > 0) {
+            $data = $result->fetch_assoc();
+            // Lưu thông tin vào session
+            $_SESSION['email'] = $data['email'];
+            $_SESSION['role'] = $data['role'];
+            $_SESSION['id_user'] = $data['id_user'];
             echo "<script> 
       alert('Đăng nhập thành công!')
       window.location.href='./index.php?page=home'

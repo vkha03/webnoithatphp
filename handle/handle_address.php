@@ -1,6 +1,7 @@
 <?php
+$address = new Address($connect, $config_id_user);
 
-// Kiểm tra nếu form được submit
+// Cập nhật địa chỉ người dùng
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     //  Lấy dữ liệu từ form
     $full_name = $_POST['full_name'];
@@ -11,12 +12,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $district = $_POST['district'];
     $ward = $_POST['ward'];
     $street = $_POST['street'];
+    $id_user = $config_id_user; // Lấy id user hiện tại
 
-    // Lấy id user hiện tại (bạn đã có sẵn biến $config_id_user trong session)
-    $id_user = $config_id_user;
     // Kiểm tra có địa chỉ chưa
-    $result = $connect->query("SELECT * FROM addresses WHERE id_user = '$id_user'");
-    if ($result->num_rows > 0) {
+    if ($address->getIdAddress() != '') {
         // Đã có -> update
         $query_address = "UPDATE addresses  
                       SET recipient_name = '$full_name',
@@ -33,16 +32,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                       VALUES ('$id_user', '$full_name','$phone', '$province', '$district', '$ward', '$label', '$street')";
     }
     if ($connect->query($query_address)) {
-
-
-        // Quay lại trang thông tin
-        echo " <script>alert('Cập nhật thông tin thành công!');
-         window.location.href='./index.php?page=home'
+        echo "<script>alert('Cập nhật thông tin thành công!');
+         window.location.href='./index.php?page=user'
          </script>";
         exit;
     } else {
-        // Nếu không phải POST thì quay về trang thông tin
-        echo " <script>alert('Không có dữ liệu để cập nhật!');
+        echo "<script>alert('Không có dữ liệu để cập nhật!');
          window.location.href='./index.php?page=user'
          </script>";
         exit;

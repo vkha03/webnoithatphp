@@ -67,7 +67,7 @@ require './handle/handle_payment.php';
                         $totalPrice += ($dataCart['sell_price'] * $dataCart['qty']);
                     ?>
                         <div class="d-flex align-items-center mb-3">
-                            <img src="/images/halden801.webp" alt="Ghế sofa" class="product-img me-3">
+                            <img src="<?= $dataCart['image'] ?>" class="product-img me-3">
                             <div class="flex-grow-1">
                                 <h6 class="mb-1"><?= $dataCart['name'] ?></h6>
                             </div>
@@ -88,19 +88,19 @@ require './handle/handle_payment.php';
                         <form>
                             <div class="mb-3">
                                 <label for="fullName" class="form-label">Họ và tên</label>
-                                <input type="text" class="form-control" id="fullName" value="<?= $address->name ?? '' ?>" readonly required>
+                                <input type="text" class="form-control" id="fullName" value="<?= $address->getName() ?? '' ?>" readonly required>
                             </div>
                             <div class="mb-3">
                                 <label for="phone" class="form-label">Số điện thoại</label>
-                                <input type="tel" class="form-control" id="phone" value="<?= $address->phone ?? '' ?>" readonly required>
+                                <input type="tel" class="form-control" id="phone" value="<?= $address->getPhone() ?? '' ?>" readonly required>
                             </div>
                             <div class="mb-3">
                                 <label for="address" class="form-label">Địa chỉ</label>
-                                <textarea class="form-control" id="address" rows="2" readonly required><?= ($address->province . ', ' . $address->district . ', ' . $address->ward . ', ' . $address->street) ?? ''  ?></textarea>
+                                <textarea class="form-control" id="address" rows="2" readonly required><?= ($address->getProvince() . ', ' . $address->getDistrict() . ', ' . $address->getWard() . ', ' . $address->getStreet()) ?? ''  ?></textarea>
                             </div>
                             <div class="mb-3">
                                 <label for="address" class="form-label">Vị trí</label>
-                                <input class="form-control" id="address" rows="2" value="<?= $address->label ?? '' ?>" readonly required>
+                                <input class="form-control" id="address" rows="2" value="<?= $address->getLabel() ?? '' ?>" readonly required>
                             </div>
                             <div class="mb-3">
                                 <label for="note" class="form-label">Ghi chú</label>

@@ -87,9 +87,9 @@ $user = new User($connect, $config_id_user);
                     <i class="bi bi-pencil-square me-2"></i> Chỉnh sửa thông tin tài khoản
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="./index.php?page=update_user" enctype="multipart/form-data">
+                    <form method="POST" action="./index.php?page=handle_user" enctype="multipart/form-data">
                         <div class="text-center mb-4">
-                            <img src="<?= $user->urlAvatar ?>" alt="Avatar" class="avatar-preview">
+                            <img src="<?= $user->getUrlAvatar() ?>" alt="Avatar" class="avatar-preview">
                         </div>
                         <div class="mb-3">
                             <label for="Avatar">Tải ảnh đại diện</label>
@@ -97,15 +97,15 @@ $user = new User($connect, $config_id_user);
                         </div>
                         <div class="mb-3">
                             <label for="fullname">Họ và tên</label>
-                            <input type="text" id="fullname" name="full_name" class="form-control" value="<?= $user->fullName ?>" required>
+                            <input type="text" id="fullname" name="full_name" class="form-control" value="<?= $user->getFullName() ?>" required>
                         </div>
                         <div class="mb-3">
                             <label for="email">Email</label>
-                            <input type="email" id="email" name="email" class="form-control" value="<?= $user->email ?>" required>
+                            <input type="email" id="email" name="email" class="form-control" value="<?= $user->getEmail() ?>" required>
                         </div>
                         <div class="mb-3">
                             <label for="phone">Số điện thoại</label>
-                            <input type="text" id="phone" name="phone" class="form-control" value="<?= $user->phone ?>" required>
+                            <input type="text" id="phone" name="phone" class="form-control" value="<?= $user->getPhone() ?>" required>
                         </div>
                         <div class="text-center mt-4">
                             <button type="submit" class="btn btn-primary me-2" name="update_user">

@@ -71,7 +71,7 @@
                     <i class="bi bi-key-fill me-2"></i> Đổi mật khẩu
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="./index.php?page=update_user">
+                    <form method="POST" action="./index.php?page=handle_user">
                         <div class="mb-3">
                             <label for="current_password">Mật khẩu hiện tại</label>
                             <input type="password" id="current_password" name="current_password" class="form-control" required>
@@ -85,7 +85,7 @@
                             <input type="password" id="confirm_password" name="confirm_password" class="form-control" required>
                         </div>
                         <div class="text-center mt-4">
-                            <button type="submit" class="btn btn-primary me-2" name="update_password"">
+                            <button type="submit" class="btn btn-primary me-2" name="update_password">
                                 <i class=" bi bi-save me-1"></i> Đổi mật khẩu
                             </button>
                             <a href="./index.php?page=user" class="btn btn-secondary">
