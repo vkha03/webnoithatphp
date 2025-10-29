@@ -29,7 +29,7 @@ require './handle/handle_product.php';
                 <label class="form-label">Danh mục sản phẩm</label>
                 <select name="id_cate" class="form-select" required>
                     <option value="">-- Chọn danh mục --</option>
-                    <?php while ($cate = $resultCate->fetch_assoc()) { ?>
+                    <?php while ($cate = $category->fetch_assoc()) { ?>
                         <option value="<?= $cate['id_cate'] ?>"><?= $cate['name'] ?></option>
                     <?php } ?>
                 </select>

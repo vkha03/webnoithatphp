@@ -106,8 +106,7 @@ require './handle/handle_payment.php';
                                 <label for="note" class="form-label">Ghi chú</label>
                                 <textarea class="form-control" id="note" rows="2"></textarea>
                             </div>
-                            <input type="submit" class="btn btn-payment w-100 mt-3" value="Sửa địa chỉ">
-                            <i class="fas fa-shopping-bag me-2"></i>
+                            <a href="./index.php?page=edit_address" class="btn btn-payment w-100 mt-3">Sửa địa chỉ</a>
                         </form>
                     </div>
 

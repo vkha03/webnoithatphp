@@ -133,7 +133,13 @@ require './handle/handle_cart.php';
                         <div>
                             <img src="<?= $dataCartIndex['image'] ?>" style="height: 50px;">
                             <h6 class="mb-1"><?= $dataCartIndex['name'] ?></h6>
-                            <small class="text-muted"><?= $dataCartIndex['qty'] ?> x <?= number_format($dataCartIndex['sell_price']) ?> ₫</small>
+                            <small class="text-muted"><?= $dataCartIndex['qty'] ?> x <?= number_format($dataCartIndex['sell_price']) ?> ₫</small><br>
+                            <?php
+                            if ($dataCartIndex['quantity'] < $dataCartIndex['qty']) {
+                                $warning = true; // Cảnh báo không đủ số lượng trong kho
+                                echo '<small class="text-danger">Cảnh báo: Số lượng trong kho không đủ, vui lòng xóa và thêm lại số lượng!</small>';
+                            }
+                            ?>
                         </div>
                         <a href="./index.php?page=handle_cart&id_item=<?= $dataCartIndex['id_item'] ?>"
                             class="btn btn-sm btn-outline-danger"
@@ -154,9 +160,7 @@ require './handle/handle_cart.php';
             </div>
             <!-- Nút thanh toán -->
             <div class="d-grid mt-3">
-                <a href="./index.php?page=payment">
-                    <button class="btn btn-primary">Thanh toán</button>
-                </a>
+                <button onclick="window.location.href='./index.php?page=payment'" class="btn btn-primary" <?php if (isset($warning)) echo 'disabled'; ?>>Thanh toán</button>
             </div>
         </div>
     </div>

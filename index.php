@@ -71,12 +71,18 @@ switch ($page) {
     case 'edit_cate':
         require './pages/edit_cate.php';
         break;
+    case 'delete_cate':
+        require './pages/delete_cate.php';
+        break;
     case 'list_request':
         require './pages/list_request.php';
         break;
     // Handle
     case 'handle_product':
         require './handle/handle_product.php';
+        break;
+    case 'handle_product_details':
+        require './handle/handle_product_details.php';
         break;
     case 'handle_user':
         require './handle/handle_user.php';
