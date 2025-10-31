@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_user'])) {
 
     if ($connect->query($query_user) === true) {
         echo "<script>alert('Cập nhật thông tin thành công!');
-              window.location.href='./index.php?page=home'</script>";
+              window.location.href='./index.php?page=user'</script>";
         exit;
     } else {
         echo "<script>alert('Cập nhật thất bại!');

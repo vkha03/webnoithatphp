@@ -51,6 +51,7 @@
     </style>
 
     <div class="container py-5">
+        <a href="javascript:history.back()" class="btn btn-light mb-4"><i class="bi bi-arrow-left"></i> Quay lại</a>
         <div class="row">
             <div class="col-lg-6 mb-4">
                 <div class="container p-3">

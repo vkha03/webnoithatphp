@@ -28,6 +28,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['review'])) {
 
 // Thêm sản phẩm vào giỏ hàng
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['cart'])) {
+    if (config_checkLogin() == false) {
+        echo "<script>alert('Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng!'); 
+        window.history.back()</script>";
+        exit;
+    }
     $quantity = $_POST['quantity'];
     // Nếu sản phẩm đã có trong giỏ hàng thì cộng thêm số lượng
     $check = $connect->query("select * from cart_items where id_user = '$config_id_user' and id_product = '$id_product'");
